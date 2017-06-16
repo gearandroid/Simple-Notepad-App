@@ -84,29 +84,29 @@ public class EditActivity extends AppCompatActivity {
                 String strFileName = clickedItem.txtFlName.toString();
 
 
-                //Reading file here: opening file by the name of the file
-                StringBuilder builder = new StringBuilder();
-                FileInputStream fis = null;
-                try {
-                    fis = openFileInput(strFileName);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-                while (true){
-                    int ch = 0;
-                    try {
-                        ch = fis.read();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    if(ch == -1) break;
-                    else {
-                        builder.append((char)ch);
-                    }
-                }
-
-                String strNoteInfo = builder.toString();
+//                //Reading file here: opening file by the name of the file
+//                StringBuilder builder = new StringBuilder();
+//                FileInputStream fis = null;
+//                try {
+//                    fis = openFileInput(strFileName);
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                while (true){
+//                    int ch = 0;
+//                    try {
+//                        ch = fis.read();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                    if(ch == -1) break;
+//                    else {
+//                        builder.append((char)ch);
+//                    }
+//                }
+//
+//                String strNoteInfo = builder.toString();
 
                 //putting file's name and notepad text into bundles
                 Bundle bundle=new Bundle();
