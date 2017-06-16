@@ -27,6 +27,7 @@ import static gonotepad.GoNotepad.EditActivity.KEY_NAME;
 
 public class EditFileActivity extends AppCompatActivity {
 
+    String strTxtFile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,37 +36,16 @@ public class EditFileActivity extends AppCompatActivity {
         Intent intentResp = getIntent();
         Bundle bundle = intentResp.getExtras();
         final String strFileName=bundle.getString(KEY_NAME);
-        //final int position = bundle.getInt(EditActivity.KEY_POSITION);
+
         ((TextView)findViewById(R.id.edtFileTempName)).setText(strFileName);
 
-
-        //Reading and opening file's text as notepad content
-
-//        File fl=getFilesDir();
-//        String str = fl.getAbsolutePath();
-
-        FileInputStream fis= null;
         try {
-            fis = openFileInput(new File(strFileName).getAbsolutePath());
+        strTxtFile = loadClickedFile(strFileName);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        StringBuilder builder = new StringBuilder();
-        while (true){
-            int ch = 0;
-            try {
-                ch = fis.read();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if(ch == -1) break;
-            else builder.append((char)ch);
-        }
-
-        ((EditText)findViewById(R.id.edtTempNotepad)).setText(builder.toString());
-
-
-
 
 
         //going back to main activity
@@ -105,13 +85,52 @@ public class EditFileActivity extends AppCompatActivity {
                 Animation animation = AnimationUtils.loadAnimation(EditFileActivity.this,R.anim.bubble);
                 findViewById(R.id.imgSave).startAnimation(animation);
 
-                ///////////
+                String afterEdit = ((EditText)findViewById(R.id.edtTempNotepad)).getText().toString();
+
+                if((strTxtFile.equals(afterEdit))){
+                    Toast.makeText(EditFileActivity.this,"Nothing edited...!!",Toast.LENGTH_LONG).show();
+                }else {
+                    //((EditText)findViewById(R.id.edtTempNotepad)).setText(" ");
+
+                    FileOutputStream fos = null;
+                    try {
+                        fos = openFileOutput(strFileName, MODE_APPEND);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        fos.write(afterEdit.getBytes());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
 
     }
 
-    private void loadClickedFile(String strFileName) throws FileNotFoundException {
+    private String loadClickedFile(String strFileName) throws IOException {
+
+        File file = getFilesDir();
+
+        String str = new File(strFileName).getAbsoluteFile().toString();
+
+        FileInputStream fis = openFileInput(strFileName);
+
+        StringBuilder builder = new StringBuilder();
+
+        while (true){
+            int ch = fis.read();
+            if(ch == -1) break;
+            else builder.append((char)ch);
+        }
+
+        ((EditText)findViewById(R.id.edtTempNotepad)).setText(builder.toString());
+
+        String beforeEdit = builder.toString();
+
+        return beforeEdit;
 
     }
 
