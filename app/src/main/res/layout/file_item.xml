@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/imgIcon"
+        android:layout_width="0dp"
+        android:layout_weight=".2"
+        android:layout_height="match_parent"
+        android:src="@mipmap/ic_launcher"
+        android:padding="7dp"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight=".57"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/txtFileName"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".4"
+            android:gravity="center|left"
+            android:textColor="#F05228"
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/txtFileLastModified"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".6"
+            android:gravity="center|left|top"
+            android:textColor="#bcaaa4"
+            android:textSize="17sp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtFileSize"
+        android:layout_width="0dp"
+        android:layout_weight=".23"
+        android:layout_height="match_parent"
+        android:gravity="center|right"
+        android:paddingRight="7dp"
+        android:textSize="18sp"
+        android:textColor="#F05228"/>
+
+</LinearLayout>
