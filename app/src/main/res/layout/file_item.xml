@@ -17,7 +17,7 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight=".57"
+        android:layout_weight=".50"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="1">
@@ -28,7 +28,7 @@
             android:layout_height="0dp"
             android:layout_weight=".4"
             android:gravity="center|left"
-            android:textColor="#F05228"
+            android:textColor="#263238"
             android:textSize="20sp"/>
         <TextView
             android:id="@+id/txtFileLastModified"
@@ -36,18 +36,18 @@
             android:layout_height="0dp"
             android:layout_weight=".6"
             android:gravity="center|left|top"
-            android:textColor="#bcaaa4"
+            android:textColor="#607D8B"
             android:textSize="17sp"/>
     </LinearLayout>
 
     <TextView
         android:id="@+id/txtFileSize"
         android:layout_width="0dp"
-        android:layout_weight=".23"
+        android:layout_weight=".30"
         android:layout_height="match_parent"
         android:gravity="center|right"
         android:paddingRight="7dp"
         android:textSize="18sp"
-        android:textColor="#F05228"/>
+        android:textColor="#607D8B"/>
 
 </LinearLayout>

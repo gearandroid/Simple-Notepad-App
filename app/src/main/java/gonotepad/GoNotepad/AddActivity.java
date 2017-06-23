@@ -44,9 +44,9 @@ public class AddActivity extends AppCompatActivity {
                 if(filename.equals("")){
 
                     AlertDialog.Builder builder = new AlertDialog.Builder((AddActivity.this));
-                    builder.setIcon(R.mipmap.ic_launcher_round);
-                    builder.setTitle("Filename Missing");
-                    builder.setMessage("Please enter filename and then save");
+                    builder.setIcon(R.drawable.ic_error_48px);
+                    builder.setTitle("Title of Note Missing");
+                    builder.setMessage("Please enter Title of the note and then save !");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

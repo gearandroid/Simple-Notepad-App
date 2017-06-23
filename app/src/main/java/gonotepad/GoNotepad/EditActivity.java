@@ -19,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -62,6 +63,7 @@ public class EditActivity extends AppCompatActivity {
         File []files = file.listFiles();
 
         for(File fl:files){
+            //or formatting date in desired way
             Date date = new Date(fl.lastModified());
 
 //            int hourOfDay=0;
@@ -69,7 +71,11 @@ public class EditActivity extends AppCompatActivity {
 //            Calendar dateTime = Calendar.getInstance();
 //            dateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
 
-            fileItems.add(new FileItem(R.drawable.ic_note_black_24dp,fl.getName(),""+(new SimpleDateFormat("dd-MMM-yyyy HH-mm-ss").format(date)),""+fl.length(),""));
+            //now making fl.length() kb/mb/gb....
+
+           String size = convertSizeLong(fl.length());
+
+            fileItems.add(new FileItem(R.drawable.ic_writing,fl.getName(),""+(new SimpleDateFormat("dd-MMM-yyyy HH-mm-ss").format(date)),""+size,""));
         }
 
         ((ListView)findViewById(R.id.lstListOfFiles)).setAdapter(new FileAdapter(this,fileItems));
@@ -119,6 +125,33 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String convertSizeLong(long length) {
+
+        String size = null;
+
+        double bt =length;
+        double kb = length/1024.0;
+        double mb = ((length/1024.0)/1024.0);
+        double gb = (((length/1024.0)/1024.0)/1024.0);
+        double tb = ((((length/1024.0)/1024.0)/1024.0)/1024.0);
+
+        DecimalFormat decFormat = new DecimalFormat("0.00");
+
+        if(tb>1) {
+            size = decFormat.format(tb).concat(" TB");
+        } else if(gb>1) {
+            size = decFormat.format(gb).concat(" GB");
+        } else if(mb>1) {
+            size = decFormat.format(mb).concat(" MB");
+        } else if(kb>1) {
+            size = decFormat.format(kb).concat(" kB");
+        } else {
+            size = decFormat.format(bt).concat(" Bytes");
+        }
+
+        return size;
     }
 }
 
